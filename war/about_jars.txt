@@ -1,0 +1,6 @@
+1. DataSource 
+	jdbc.jar of spring
+	commons-dbcp.jar
+	commons-pool.jar
+	
+	

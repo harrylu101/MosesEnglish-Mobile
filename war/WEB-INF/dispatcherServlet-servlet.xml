@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!-- WebApplicationContext -->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+
+	<bean name="/moses.m" class="com.harry.web.MosesEnglishController">
+		<property name="viewPage" value="mosesenglish" />
+	</bean>
+
+	<bean name="/weekly.m" class="com.harry.web.WeeklyTopicController">
+		<property name="viewPage" value="weeklyWords" />
+	</bean>
+
+	<bean name="/api/weekly/*.m" class="com.harry.web.api.WeeklyTopicApiController">
+		<property name="viewPage" value="api/weekly_topic" />
+	</bean>
+
+	<bean name="/api/weekday/*.m" class="com.harry.web.api.WeekdayTopicApiController">
+		<property name="viewPage" value="api/weekday_topic" />
+	</bean>
+	<bean name="/api/word/*.m" class="com.harry.web.api.WordApiController">
+		<property name="viewPage" value="api/word" />
+	</bean>
+
+
+
+</beans>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Provides Service Mappings for Service Manager to use -->
+
+	<bean id="com.harry.core.ServiceMappings" class="com.harry.core.ServiceMappings">
+		<property name="serviceMappings">
+
+			<map>
+
+				<entry key="com.harry.service.WeeklyTopicService">
+					<bean class="com.harry.service.WeeklyTopicService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="com.harry.service.DailyTopicService">
+					<bean class="com.harry.service.DailyTopicService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="com.harry.service.DailyTopicWordsAndQuoteService">
+					<bean class="com.harry.service.DailyTopicWordsAndQuoteService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="com.harry.service.api.WeeklyTopicApiService">
+					<bean class="com.harry.service.api.WeeklyTopicApiService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="com.harry.service.api.WeekdayTopicApiService">
+					<bean class="com.harry.service.api.WeekdayTopicApiService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+
+				<entry key="com.harry.service.api.WordApiService">
+					<bean class="com.harry.service.api.WordApiService">
+						<property name="jdbcTemplate">
+							<ref bean="jdbcTemplate" />
+						</property>
+					</bean>
+				</entry>
+
+
+			</map>
+		</property>
+	</bean>
+
+
+
+
+
+	<!-- ServiceManager tries to get Service Object from Service Mapping. -->
+	<bean id="com.harry.core.ServiceManager" class="com.harry.core.ServiceManager">
+		<property name="serviceMappings">
+			<ref bean="com.harry.core.ServiceMappings" />
+		</property>
+	</bean>
+
+
+</beans>
+

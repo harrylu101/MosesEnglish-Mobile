@@ -1,0 +1,83 @@
+关于weekly topics
+
+1) 获取最近topics
+URL：/yourdomainname/mosesenglish/api/weekly/latest.html
+required parameters: 
+	木有
+optional parameters: 
+	size: 你需要的数据大小。默认：10个
+
+
+2）获取任一topic
+URL：/yourdomainname/mosesenglish/api/weekly/any.html
+required parameters: 
+	year: 那一年
+	week：那一周
+optional parameters: 
+	木有
+
+
+3）获取某年某周前的topics
+URL：/yourdomainname/mosesenglish/api/weekly/any.html
+required parameters: 
+	year: 那一年
+	week：那一周
+optional parameters: 
+	木有
+
+3）获取某年某周前的topics
+URL：/yourdomainname/mosesenglish/api/weekly/before.html
+required parameters: 
+	year: 那一年
+	week：那一周
+	size: 数据大小
+optional parameters: 
+	木有
+	
+4）获取某年某周前的topics
+URL：/yourdomainname/mosesenglish/api/weekly/after.html
+required parameters: 
+	year: 那一年
+	week：那一周
+	size: 数据大小
+optional parameters: 
+	木有
+
+-------------------------------------	
+
+关于weekday topics
+
+1）获取某一周的weekday topics
+URL：/yourdomainname/mosesenglish/api/weekday/entries.html
+required parameters: 
+	weeklyTopicId：某周的weekly topic id
+optional parameters: 
+	木有
+
+
+1）获取随机的weekday topics
+URL：/yourdomainname/mosesenglish/api/weekday/random.html
+required parameters:
+	木有 
+optional parameters: 
+	size：数据大小； 默认5
+
+
+-------------------------------------
+
+关于words
+	
+1）获取某一weekday topic 的相关words
+URL：/yourdomainname/mosesenglish/api/word/entries.html
+required parameters: 
+	weekdayTopicId：week day topic id
+optional parameters: 
+	木有
+
+1）获取随机的words
+URL：/yourdomainname/mosesenglish/api/word/random.html
+required parameters:
+	木有 
+optional parameters: 
+	size：数据大小； 默认5
+	
