@@ -43,4 +43,19 @@ public class DailyTopicService extends CommonService {
 		return jdbcTemplate.update(SQL_DAILY_TOPIC_UPDATE_IMAGE_AND_QUOTE,
 				new Object[] { imageUrl, quoteEn, quoteCn, id });
 	}
+
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public boolean exists(String date) {
+
+		final String SQL_WEEKDAY_TOPIC_EXISTS = "SELECT * FROM daily_topics WHERE topic_date =?";
+		List<Map<String, Object>> weekdayTopics = super.jdbcTemplate
+				.queryForList(SQL_WEEKDAY_TOPIC_EXISTS, new Object[] { date });
+
+		return !weekdayTopics.isEmpty();
+	}
+
 }

@@ -13,6 +13,22 @@ public class DailyTopicWordsAndQuoteService extends CommonService {
 
 		return jdbcTemplate.update(SQL_DAILY_WORDS_CREATE, new Object[] { word,
 				defintion, topicId });
-
 	}
+
+	/**
+	 * 
+	 * @param word
+	 * @param topicId
+	 * @return
+	 */
+	public boolean exists(String word, int topicId) {
+
+		final String SQL_WORDS_EXISTS = "SELECT * FROM daily_words WHERE word=? AND topic_id = ?";
+
+		List<Map<String, Object>> words = super.jdbcTemplate.queryForList(
+				SQL_WORDS_EXISTS, new Object[] { word, topicId });
+
+		return !words.isEmpty();
+	}
+
 }

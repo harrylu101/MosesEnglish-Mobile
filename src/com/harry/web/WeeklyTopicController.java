@@ -103,11 +103,25 @@ public class WeeklyTopicController extends CommonController {
 		WeeklyTopicService weeklyTopicSerice = (WeeklyTopicService) mgr
 				.getService(WeeklyTopicService.class.getName());
 
+		boolean weeklyTopicExists = weeklyTopicSerice.exists(
+				weeklyTopicModel.getYear(), weeklyTopicModel.getWeek());
+
+		if (weeklyTopicExists) {
+			// topic exists, skip it
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("topic exists. info:  "
+						+ weeklyTopicModel.toString());
+			}
+
+			return;
+		}
+
 		// Saving Process. Save model information to database,
 		int weekNumber = weeklyTopicSerice.addTopic(weeklyTopicModel.getYear(),
 				weeklyTopicModel.getWeek(), weeklyTopicModel.getTopic(),
 				weeklyTopicModel.getTopicDescription());
-		
+
 		if (logger.isDebugEnabled()) {
 			logger.debug(weekNumber);
 		}
@@ -122,6 +136,20 @@ public class WeeklyTopicController extends CommonController {
 		// Save a list of daily topics to database
 		List<DailyTopic> dailyTopics = weeklyTopicModel.getDailyTopics();
 		for (DailyTopic dt : dailyTopics) {
+
+			// check if weekday topic already existed
+			boolean weekDayTopicAlreadyExists = dailyTopicService.exists(dt
+					.getIssueDate());
+
+			if (weekDayTopicAlreadyExists) {
+				// weekday topic exists. skip it
+				if (logger.isDebugEnabled()) {
+					logger.debug("weekday topic exists. info :" + dt.toString());
+				}
+
+				return;
+			}
+
 			dailyTopicService.addDailyTopic(dt.getIssueDate(), dt.getWord(),
 					dt.getDefinition(), weekNumber, dt.getTopicLink());
 		}
@@ -166,6 +194,21 @@ public class WeeklyTopicController extends CommonController {
 			List<DailyWord> dailyWords = wordsAndQuote.getWords();
 
 			for (DailyWord aWord : dailyWords) {
+
+				// check if the word exists
+				boolean wordExists = dailyTopicWordsQuoteService.exists(
+						aWord.getWord(), id);
+
+				if (wordExists) {
+					// word exists
+					if (logger.isDebugEnabled()) {
+						logger.debug("word exists. word info:"
+								+ aWord.toString());
+					}
+
+					return;
+				}
+
 				// save back to database with id
 				dailyTopicWordsQuoteService.addDailyTopicWords(aWord.getWord(),
 						aWord.getDefinition(), id);

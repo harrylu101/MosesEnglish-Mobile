@@ -70,7 +70,7 @@ public class WeeklyTopicService extends CommonService {
 	 * @param week
 	 * @return
 	 */
-	public boolean topicExists(int year, int week) {
+	public boolean exists(int year, int week) {
 		final String SQL_WEEKLY_TOPIC_EXISTS = "SELECT * FROM weekly_topics WHERE topic_year = ? AND topic_week = ?";
 		List<Map<String, Object>> weeklyTopics = super.jdbcTemplate
 				.queryForList(SQL_WEEKLY_TOPIC_EXISTS, new Object[] { year,
