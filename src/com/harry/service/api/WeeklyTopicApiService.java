@@ -92,7 +92,7 @@ public class WeeklyTopicApiService extends CommonService {
 	 * @return
 	 */
 	public List<Map<String, Object>> getWeeklyTopicLatest(int size) {
-		final String SQL_GET_WEEKLY_TOPIC_LASTEST = "SELECT * FROM weekly_topics ORDER BY topic_year,topic_week DESC LIMIT ? ";
+		final String SQL_GET_WEEKLY_TOPIC_LASTEST = "SELECT * FROM weekly_topics ORDER BY topic_year DESC,topic_week DESC LIMIT ? ";
 		return super.jdbcTemplate.queryForList(SQL_GET_WEEKLY_TOPIC_LASTEST,
 				new Object[] { size });
 	}

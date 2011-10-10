@@ -1,10 +1,14 @@
 package com.harry.domain.parser;
 
+import org.apache.log4j.Logger;
+
 import com.harry.domain.DailyTopicWordsAndQuote;
 import com.harry.domain.DailyWord;
 import com.harry.utils.StringUtil;
 
 public class DailyWordsParser {
+
+	static Logger logger = Logger.getLogger(DailyWordsParser.class);
 
 	private static final String URL_MOSESENGLISH = "http://mosesenglish.com/";
 
@@ -19,7 +23,6 @@ public class DailyWordsParser {
 	private static final String CONTENT_WORD_END = "</strong></span>";
 
 	// constants for extracting out definitions
-	private static final String PARAGRAPH_START = "<p";
 	private static final String PARAGRAPH_END = "</p>";
 
 	// constants for extracting out quotes
@@ -57,10 +60,17 @@ public class DailyWordsParser {
 		// find string like this "<img src="..." alt="..." />"
 		final int fromIndex = htmlSourceString.indexOf(CONTENT_IMAGE_START)
 				+ CONTENT_IMAGE_START.length();
+
+		if (fromIndex == -1) {
+			// did not find matched string
+			logger.error("did not find matched string for image link");
+			return;
+		}
+
 		final int toIndex = htmlSourceString.indexOf(CONTENT_IMAGE_END,
 				fromIndex);
 
-		if (fromIndex == -1 || toIndex == -1) {
+		if (toIndex == -1) {
 			// did not find the string
 			return;
 		}
@@ -83,9 +93,7 @@ public class DailyWordsParser {
 				.substring(imageSrcMarkStart, ImageSrcMarkEnd);
 
 		// set to java bean
-		this.wordsToday.setImageUrl(URL_MOSESENGLISH + imageURL);
-
-		System.out.println(this.wordsToday.getImageUrl());
+		this.wordsToday.setImageUrl(URL_MOSESENGLISH + imageURL.substring(1)); // escape
 	}
 
 	/**
@@ -139,19 +147,23 @@ public class DailyWordsParser {
 
 		// find where the quote starts
 		int quoteFromIndex = htmlSourceString.indexOf(CONTENT_QUOTE_START);
-
 		// find out where English quote starts
 		int englishQuoteFromIndex = quoteFromIndex
 				+ CONTENT_QUOTE_START.length();
+		int englishQuoteToIndex = htmlSourceString.indexOf(
+				CONTENT_QUOTE_BREAK_LINE, englishQuoteFromIndex);
+		// log
+		logger.debug("QuoteFromIndex : " + quoteFromIndex);
+		logger.debug("englishQuoteFromIndex : " + englishQuoteFromIndex);
+		logger.debug("englishQuoteToIndex : " + englishQuoteToIndex);
+
 		// extract out English quote
-		String englishQuote = htmlSourceString.substring(
-				englishQuoteFromIndex,
-				htmlSourceString.indexOf(CONTENT_QUOTE_BREAK_LINE,
-						englishQuoteFromIndex)).trim();
+		String englishQuote = htmlSourceString.substring(englishQuoteFromIndex,
+				englishQuoteToIndex).trim();
 
 		// extract out Chinese quote
 		int chineseQuoteFromIndex = englishQuoteFromIndex
-				+ englishQuote.length()+CONTENT_QUOTE_BREAK_LINE.length();
+				+ englishQuote.length() + CONTENT_QUOTE_BREAK_LINE.length();
 		int chineseQuoteToIndex = htmlSourceString.indexOf(CONTENT_QUOTE_DIV,
 				chineseQuoteFromIndex);
 

@@ -60,6 +60,11 @@ public class WeeklyTopic {
 		this.dailyTopics.add(topic);
 	}
 
+	public boolean isDataComplete() {
+		return this.topic == null || this.topicDescription == null
+				|| this.dailyTopics.size() == 0;
+	}
+
 	@Override
 	public String toString() {
 		return "WeeklyTopic [topic=" + topic + ", year=" + year + ", week="
@@ -67,6 +72,4 @@ public class WeeklyTopic {
 				+ ", dailyTopics=" + dailyTopics.toString() + "]";
 	}
 
-	
-	
 }

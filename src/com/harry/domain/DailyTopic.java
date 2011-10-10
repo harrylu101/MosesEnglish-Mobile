@@ -38,6 +38,7 @@ public class DailyTopic {
 		this.topicLink = topicLink;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "DailyTopic [word=" + word + ", definition=" + definition

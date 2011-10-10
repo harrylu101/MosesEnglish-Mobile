@@ -45,6 +45,11 @@ public class WeeklyTopicParser {
 				contentFromIndex);
 		int titleToIndex = htmlString.indexOf(TITLE_END_MARK, titleFromIndex);
 
+		if (titleFromIndex == -1 || titleToIndex == -1) {
+			// error
+			return;
+		}
+
 		this.lastReadIndex = titleToIndex;
 
 		String title = htmlString.substring(
@@ -66,6 +71,11 @@ public class WeeklyTopicParser {
 		int descriptionToIndex = this.htmlString.indexOf(DESCRIPTION_END_MARK,
 				descriptionFromIndex);
 
+		if (descriptionFromIndex == -1 || descriptionToIndex == -1) {
+			// error
+			return;
+		}
+
 		String description = htmlString.substring(descriptionFromIndex,
 				descriptionToIndex);
 		description = StringUtil.escapeHTMLTags(description).trim();
@@ -84,6 +94,11 @@ public class WeeklyTopicParser {
 		int weekDayFromIndex = this.lastReadIndex
 				+ DESCRIPTION_END_MARK.length();
 		int weekDayToIndex = this.contentToIndex;
+
+		if (weekDayFromIndex == -1 || weekDayToIndex == -1) {
+			// error
+			return;
+		}
 
 		// extract out related words
 		String relatedWords = htmlString.substring(weekDayFromIndex,
@@ -128,7 +143,7 @@ public class WeeklyTopicParser {
 			dt.setWord(topicWord);
 			dt.setDefinition(topicWordDefintion);
 			dt.setIssueDate(topicWordIssueDate);
-			dt.setTopicLink(AppContants.MOSES_URL + topicWordLink);
+			dt.setTopicLink(AppContants.MOSES_URL + "/" + topicWordLink);
 			this.weeklyTopic.addDailyTopic(dt);
 
 			if (logger.isDebugEnabled()) {
@@ -185,8 +200,4 @@ public class WeeklyTopicParser {
 
 	}
 
-	public static void main(String[] args) {
-		String testStr = "见到袁新民老师了第一集2011年 第9周";
-
-	}
 }

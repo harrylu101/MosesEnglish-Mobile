@@ -9,7 +9,7 @@ public class DailyWord {
 	}
 
 	public void setWord(String word) {
-		this.word = word;
+		this.word = word.trim();
 	}
 
 	public String getDefinition() {
@@ -17,7 +17,12 @@ public class DailyWord {
 	}
 
 	public void setDefinition(String definition) {
-		this.definition = definition;
+		this.definition = definition.trim();
+	}
+
+	@Override
+	public String toString() {
+		return "DailyWord [word=" + word + ", definition=" + definition + "]";
 	}
 
 }
