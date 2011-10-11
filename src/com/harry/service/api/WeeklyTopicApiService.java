@@ -35,10 +35,10 @@ public class WeeklyTopicApiService extends CommonService {
 	 */
 	public List<Map<String, Object>> getWeeklyTopicsBefore(int year, int week,
 			int size) {
-		final String SQL_GET_WEEKLY_TOPIC_AFTER = "SELECT * FROM weekly_topics WHERE topic_year <=? AND topic_week <=?  ORDER BY topic_year, topic_week LIMIT ?";
+		final String SQL_GET_WEEKLY_TOPIC_AFTER = "SELECT * FROM weekly_topics WHERE topic_year <=? AND topic_week <=?  ORDER BY topic_year DESC, topic_week DESC LIMIT ?";
 
 		return super.jdbcTemplate.queryForList(SQL_GET_WEEKLY_TOPIC_AFTER,
-				new Object[] { year, week, size });
+				new Object[] { year, week-1, size });
 	}
 
 	/**
