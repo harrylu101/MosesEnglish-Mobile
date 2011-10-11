@@ -17,12 +17,14 @@ public class StringTest {
 	public static void main(String[] args) throws ClientProtocolException,
 			IOException {
 
-		Calendar now = Calendar.getInstance();
-
-		now.set(2010, 05, 28);
-
-		System.out.println(now.get(Calendar.YEAR));
-		System.out.println(now.get(Calendar.MONTH));
-		System.out.println(now.get(Calendar.WEEK_OF_YEAR)-1);
+		for (int i = 0; i < 5; i++) {
+			
+			if (i == 3) {
+				break;
+			}
+			
+			
+			System.out.println(i);
+		}
 	}
 }

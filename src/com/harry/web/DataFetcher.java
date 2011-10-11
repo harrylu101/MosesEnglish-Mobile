@@ -139,7 +139,7 @@ public class DataFetcher {
 					logger.debug("weekday topic exists. info :" + dt.toString());
 				}
 
-				break;
+				continue;
 			}
 
 			dailyTopicService.addDailyTopic(dt.getIssueDate(), dt.getWord(),
@@ -192,7 +192,7 @@ public class DataFetcher {
 
 				if (wordExists) {
 					// skip insertion
-					break;
+					continue;
 				}
 
 				// save back to database with id

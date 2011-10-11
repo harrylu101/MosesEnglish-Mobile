@@ -42,7 +42,9 @@ public class DataFetherTask extends TimerTask {
 			DailyTopicWordsAndQuote dtwq = dataFetcher.getWordsAndQuote();
 			// log it
 			if (logger.isDebugEnabled()) {
-				logger.debug(wt + "\n" + dtwq);
+				logger.debug("data retrieved by timer");
+				logger.debug(wt);
+				logger.debug(dtwq);
 			}
 		} catch (ClientProtocolException e) {
 			// do nothing
