@@ -19,7 +19,7 @@
 			<imageurl><![CDATA[${random_word.week_day_topic.topic_image_url}]]></imageurl>
 			<quote_en><![CDATA[${random_word.week_day_topic.quote_en}]]></quote_en>
 			<quote_cn><![CDATA[${random_word.week_day_topic.quote_cn}]]></quote_cn>
-			
+			<weely_topic_id>${random_word.week_day_topic.weekly_topic_id}</weely_topic_id>
 			<words>
 			<c:forEach var="word" items="${random_word.words}">
 			    <entry>
